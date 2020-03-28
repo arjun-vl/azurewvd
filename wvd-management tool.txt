@@ -1,0 +1,5 @@
+##Follow the link to deploy WVD management Tool
+ 
+   https://docs.microsoft.com/en-us/azure/virtual-desktop/manage-resources-using-ui
+   
+##Once after deploying the tool we can manage the WVD from this tool.
