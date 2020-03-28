@@ -48,4 +48,42 @@ Get-RdsSessionHost -TenantName “your-tenant-name” -HostPoolName "hostpool-na
 
 ##create Azure File share for setting up FSLogix prifiling 
 
+##create a file share loaction from azure file share
+
+##Add permission to the users in WVD tenant , so that the users in WVD can create their profiles in Azure file share.
+##The permissions of each users will be comntrolled from a mangement server.
+##In azure portal click on the connet tab for respective file share path, there will be instructions to connect to the file share.
+##Once this is connected to the management server , Right click on the attached network share folder --> properties --> advanced.
+##In this pane you wil be able to control the user access and permissions
+##set the following permissions
+
+       CREATOR OWNER               Subfolders and Files Only	               Modify
+       Administrator	             This Folder, Subfolders and Files	       Full Control
+       Users	                     This Folder Only                          Modify
+       Users\Group	               This Folder Only	                         Modify
+
+##FSLogix set up 
+
+#follow the link for more details https://docs.microsoft.com/en-us/azure/virtual-desktop/create-fslogix-profile-container
+
+Connect to the virtual machine with the credentials you provided when creating the virtual machine.
+       Launch an internet browser and navigate to this link to download the FSLogix agent.
+       Navigate to either \\Win32\Release or \\X64\Release in the .zip file and run FSLogixAppsSetup to install the FSLogix agent. To learn more about how to install FSLogix, see Download and install FSLogix.
+       Navigate to Program Files > FSLogix > Apps to confirm the agent installed.
+       From the start menu, run RegEdit as an administrator. Navigate to Computer\HKEY_LOCAL_MACHINE\software\FSLogix.
+       Create a key named Profiles.
+       Create the following values for the Profiles key:
+           
+              DeleteLocalProfileWhenVHDShouldApply       DWORD(32-bit)      value=1   : delete local profile if exists and matches the profile being loaded from VHD
+              Enabled                                    DWORD(32-bit)      value=1   : Enables the Fslogic Profiles
+              FlipFlopProfileDirectoryName               DWORD(32-bit)      value=1   : When set to ‘1’ the SID folder is created as “%username%%sid%” instead of the default “%sid%%username%”. This setting has the same effect as setting SIDDirNamePattern = “%username%%sid%” and SIDDirNameMatch = “%username%%sid%”.
+              FoldersToRemove                            REG_MULTI_SZ       no value
+              VHDLocations                               REG_MULTI_SZ       value= ##sharefile location (mount path)
+              VolumeType                                 REG_SZ             value=vhd
+
+
+
+
+
+
 
