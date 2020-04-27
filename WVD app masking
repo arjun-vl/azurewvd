@@ -1,0 +1,14 @@
+
+Application Masking with FSLogix in Windows Virtual Desktop
+
+##With help of FSLogix apprule editor we can mask the application inside a WVD. This acan be masked on user level.
+
+##Install the FSLogix agent in the WVD machines. 
+ 
+  link :  https://aka.ms/fslogix_download
+  
+## extact the downloaded file and install the FSLogix apprule editor.
+
+##Once after installing the same please follow the video tutorial to complete the setup
+
+link : https://youtu.be/Ga2RENC-Cgw
